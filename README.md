@@ -15,9 +15,10 @@
 </p>
 
 
-## 🧠 My Focus Areas
+## 🧠 Areas of Expertise
+- Software Engineering
 - Full-Stack Web Development
-- Web Security Fundamentals & Secure Coding
+- Secure Web Development
 
 
 ## 📊 GitHub Stats & Trophies
