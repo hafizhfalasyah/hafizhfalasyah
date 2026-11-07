@@ -1,0 +1,1314 @@
+@import "tailwindcss";
+
+/*
+ * Sumber tunggal semua token. `--*: initial` menghapus tema bawaan Tailwind, jadi
+ * utility hanya ada untuk nilai yang tertulis di sini (warna lain, radius, atau
+ * langkah spacing di luar skala tidak menghasilkan CSS).
+ * `static` membuat setiap token tersedia sebagai variabel CSS, termasuk untuk GSAP.
+ */
+@theme static {
+  --*: initial;
+
+  /* Warna: chroma 0. Sisi kiri tema terang, sisi kanan tema gelap. */
+  --color-canvas: light-dark(oklch(0.985 0 0), oklch(0.145 0 0));
+  --color-plate-1: light-dark(oklch(0.955 0 0), oklch(0.19 0 0));
+  --color-plate-2: light-dark(oklch(0.92 0 0), oklch(0.235 0 0));
+  --color-plate-3: light-dark(oklch(0.88 0 0), oklch(0.28 0 0));
+  --color-ink: light-dark(oklch(0.18 0 0), oklch(0.96 0 0));
+  --color-ink-2: light-dark(oklch(0.38 0 0), oklch(0.76 0 0));
+  /* Hanya di canvas dan plate-1. */
+  --color-ink-3: light-dark(oklch(0.5 0 0), oklch(0.64 0 0));
+  /* Fokus dan batas kontrol, minimum 3:1 di semua bidang, termasuk plate-3 dan tinta. */
+  --color-edge: light-dark(oklch(0.57 0 0), oklch(0.56 0 0));
+  /* Nama di atas foto: sama di kedua tema, karena fotonya tidak ikut berganti tema. */
+  --color-on-photo: oklch(0.18 0 0);
+  /* Nada dinding foto-7: salinan nama tetap terbaca selama foto belum termuat. */
+  --color-photo-rest: oklch(0.72 0 0);
+
+  /* Tipografi */
+  --font-sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
+  /* Dibaca preflight Tailwind; ikut terhapus oleh `--*: initial`. */
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-mono);
+
+  --text-meta: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-meta--line-height: 1.45;
+  --text-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-body--line-height: 1.55;
+  --text-lead: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-lead--line-height: 1.35;
+  --text-sub: clamp(1.75rem, 1.5rem + 1.2vw, 2.25rem);
+  --text-sub--line-height: 1.15;
+  --text-title: clamp(2.5rem, 2rem + 2.5vw, 3.5rem);
+  --text-title--line-height: 1.05;
+  --text-display-s: clamp(3rem, 8vw, 7rem);
+  --text-display-s--line-height: 0.95;
+  /*
+   * Diukur: "Falasyah" pada wdth 125, wght 800 selebar 4.87em, jadi muat sampai lebar 320px.
+   * Tinggi layar ikut membatasi, agar CV dan kontak tetap di viewport pertama pada laptop pendek.
+   */
+  --text-display-l: clamp(3.5rem, min(16vw, 27svh), 19rem);
+  --text-display-l--line-height: 0.9;
+
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 800;
+
+  /* Lebih rapat dari ini membuat huruf bersentuhan pada wdth 125, wght 800. */
+  --tracking-display: -0.02em;
+  --tracking-title: -0.02em;
+
+  /* Spacing: dasar 4px, hanya langkah berikut. */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-24: 6rem;
+  --spacing-32: 8rem;
+  --spacing-48: 12rem;
+  --spacing-gutter: var(--gutter);
+  --spacing-section: clamp(6rem, 14vw, 12rem);
+
+  /* Grid: 4 kolom di bawah 768px, 8 sampai 1279px, 12 di atasnya. */
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --container-prose: 65ch;
+  --container-page: 110rem;
+  /* foto-1 aslinya 331px, jadi tetap tajam sampai sekitar 165px di layar 2x. */
+  --container-portrait: 165px;
+
+  /* Motion. Padanan GSAP: enter = expo.out, plate = power4.inOut. */
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-plate: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-micro: 0.18s;
+  --duration-short: 0.32s;
+  --duration-base: 0.6s;
+  --duration-long: 0.9s;
+  --stagger: 0.06s;
+
+  /* Lapisan */
+  --z-index-plate: 10;
+  --z-index-nav: 20;
+  --z-index-cursor: 30;
+  --z-index-transition: 40;
+  --z-index-loader: 50;
+  --z-index-skip-link: 60;
+}
+
+/* Skrip tema menandai <html> dengan data-js; kontrol yang butuh JS memakai `no-js:hidden`. */
+@custom-variant no-js (:root:not([data-js]) &);
+
+@layer base {
+  /* Tanpa data-theme atau tanpa JS, tema mengikuti sistem. */
+  :root {
+    color-scheme: light dark;
+    --grid-columns: 4;
+    --gutter: 1rem;
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  @media (width >= 48rem) {
+    :root {
+      --grid-columns: 8;
+      --gutter: 1.5rem;
+    }
+  }
+  @media (width >= 80rem) {
+    :root {
+      --grid-columns: 12;
+    }
+  }
+  @media (width >= 90rem) {
+    :root {
+      --gutter: 2rem;
+    }
+  }
+  @media (width >= 120rem) {
+    :root {
+      --gutter: 2.5rem;
+    }
+  }
+
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    caret-color: var(--color-ink);
+    scrollbar-color: var(--color-edge) var(--color-canvas);
+    /*
+     * Menu mengunci scroll tanpa menggeser layout saat scrollbar hilang. Elemen fixed tidak bisa melukis ke
+     * gutter, jadi pada scrollbar klasik menu menyisakan strip alas selebar gutter; itu harga yang diterima.
+     */
+    scrollbar-gutter: stable;
+    text-size-adjust: 100%;
+    /* Target anchor dan elemen yang difokus tidak tertutup header sticky. */
+    scroll-padding-top: var(--spacing-16);
+  }
+
+  /* Subset CSS Lenis yang dipakai. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped,
+  :root[data-menu-open] {
+    overflow: hidden;
+  }
+
+  /* Plate terakhir Susun Lapis selebar viewport; `clip` tidak mengganggu `sticky` di dalamnya. */
+  main {
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-canvas);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-optical-sizing: auto;
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-edge);
+    outline-offset: 3px;
+  }
+
+  /* Fokus hasil navigasi (main dan target anchor), bukan kontrol. */
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+}
+
+@layer components {
+  .page-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--gutter);
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  /* Satu keluarga, tiga suara: lebar dan berat untuk nama, normal untuk teks, sempit untuk meta. */
+  .type-name {
+    font-size: var(--text-display-l);
+    line-height: var(--text-display-l--line-height);
+    font-weight: var(--font-weight-black);
+    font-stretch: 125%;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .type-project {
+    font-size: var(--text-display-s);
+    line-height: var(--text-display-s--line-height);
+    font-weight: var(--font-weight-black);
+    font-stretch: 112.5%;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .type-title {
+    font-size: var(--text-title);
+    line-height: var(--text-title--line-height);
+    font-weight: var(--font-weight-bold);
+    font-stretch: 112.5%;
+    letter-spacing: var(--tracking-title);
+  }
+
+  .type-meta {
+    font-size: var(--text-meta);
+    line-height: var(--text-meta--line-height);
+    font-stretch: 87.5%;
+  }
+
+  /* Martian Mono hanya untuk teknologi dan periode, tidak pernah uppercase. */
+  .type-tech {
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    line-height: var(--text-meta--line-height);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Seleksi teks tetap terlihat di atas fondasi tinta. */
+  .on-ink ::selection {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+
+  /* Header: plate tersendiri saat ada konten di bawahnya, menyingkir saat membaca ke bawah. */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-nav);
+    flex: none;
+    background: var(--color-canvas);
+    transition: transform var(--duration-short) var(--ease-enter);
+  }
+  .site-header[data-scrolled] {
+    background: var(--color-plate-1);
+  }
+  .site-header[data-hidden]:not(:focus-within) {
+    transform: translateY(-100%);
+  }
+  :root[data-menu-open] .site-header {
+    background: var(--color-canvas);
+    transform: none;
+  }
+
+  /* Penanda aktif masuk dari kiri dan keluar ke kanan, sehingga terbaca berpindah antar tautan. */
+  .nav-marker {
+    position: relative;
+    display: inline-block;
+  }
+  .nav-marker::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: calc(var(--spacing-1) * -1);
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--duration-short) var(--ease-enter);
+  }
+  [aria-current] > .nav-marker::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .site-menu {
+    position: fixed;
+    inset: var(--spacing-16) 0 0;
+    z-index: var(--z-index-nav);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    overflow: hidden auto;
+  }
+  .site-menu[data-menu-entering] {
+    visibility: hidden;
+  }
+  .site-menu-list {
+    display: grid;
+    grid-template-rows: repeat(4, minmax(4.5rem, 1fr));
+  }
+  /* Batas baris bisa jatuh di pecahan piksel: tanpa tumpang tindih, konten halaman tembus di sana. */
+  .site-menu-list > * {
+    margin-block-end: -1px;
+  }
+  /* Tautan selebar baris: cincin di luar kotak terpotong layar dan baris tetangga. */
+  .site-menu-list a:focus-visible {
+    outline-offset: -5px;
+  }
+
+  /* Loader: hanya aktif saat skrip inline menyetel `data-loader`, jadi tanpa JS tidak pernah muncul. */
+  .loader {
+    display: none;
+  }
+  :root[data-loader] .loader {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-index-loader);
+    display: block;
+    overflow: clip;
+    background: var(--color-canvas);
+    /*
+     * Failsafe: halaman tidak pernah terkunci meski JS gagal di tengah jalan.
+     * Durasi 0s disengaja: durasi kecil berakhir di progres 0.999..., sehingga `visibility`
+     * tetap `visible` dan lapisan masih menangkap klik.
+     */
+    animation: loader-failsafe 0s linear 2.4s forwards;
+  }
+  :root[data-loader="lift"] .loader {
+    transform: translateY(-100%);
+    transition: transform 0.48s var(--ease-plate);
+  }
+  .loader-stack {
+    position: absolute;
+    inset: 0;
+  }
+  /* Plate dengan kedalaman d berada di bawah viewport sampai langkah ke-(d+1) selesai. */
+  .loader-plate {
+    position: absolute;
+    inset-inline: 0;
+    bottom: calc(var(--depth) * 25%);
+    display: flex;
+    align-items: flex-end;
+    /* Tumpang tindih 1px dengan plate di atasnya: 25% bisa pecahan piksel dan menyisakan celah. */
+    height: calc(25% + 1px);
+    padding: var(--spacing-3) var(--gutter);
+    transform: translateY(calc(clamp(0, var(--depth) + 1 - var(--loader-step, 0), 1) * (var(--depth) + 1) * 100%));
+    transition: transform var(--duration-short) var(--ease-enter);
+  }
+  .loader-plate:nth-child(1) {
+    --depth: 0;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+  .loader-plate:nth-child(2) {
+    --depth: 1;
+    background: var(--color-plate-3);
+  }
+  .loader-plate:nth-child(3) {
+    --depth: 2;
+    background: var(--color-plate-2);
+  }
+  .loader-plate:nth-child(4) {
+    --depth: 3;
+    background: var(--color-plate-1);
+  }
+  .loader-skip {
+    position: absolute;
+    top: var(--spacing-2);
+    right: var(--gutter);
+    min-height: var(--spacing-12);
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Mask SplitText: ruang ekstra agar descender (y, g, j, p) tidak terpotong. */
+  .split-line-mask {
+    padding-block-end: 0.15em;
+    margin-block-end: -0.15em;
+  }
+
+  /* Foto lebih tinggi 12% dari bingkai, jadi parallax tidak pernah memperlihatkan tepi. */
+  .parallax-frame {
+    position: relative;
+    overflow: clip;
+    background: var(--color-plate-2);
+  }
+  .parallax-frame img {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    width: 100%;
+    height: 112%;
+    max-width: none;
+    object-fit: cover;
+  }
+
+  /*
+   * Hero. Ponsel: nama, plate yang mengisi sisa tinggi layar, lalu teks, sehingga nama, CV, dan
+   * kontak selalu terlihat tanpa scroll. Baris kedua nama selalu berada di atas area dinding foto.
+   * `--plate-shift` adalah jarak kolom pertama ke tepi kiri plate, sebagai persen lebar plate:
+   * `left` dihitung terhadap lebar plate, jadi tidak perlu unit viewport yang keliru saat ada scrollbar.
+   */
+  .maket {
+    --name-line: calc(var(--text-display-l) * var(--text-display-l--line-height));
+    --hero-top: var(--spacing-2);
+    --plate-top: calc(var(--spacing-16) + var(--hero-top) + var(--name-line));
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    grid-template-rows: auto minmax(10rem, 1fr) auto;
+    column-gap: var(--gutter);
+    min-height: calc(100svh - var(--spacing-16));
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    padding-block-start: var(--hero-top);
+  }
+  .hero-name {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .hero-plate {
+    --plate-shift: calc(-100% / 3);
+    position: relative;
+    z-index: var(--z-index-plate);
+    grid-column: 2 / -1;
+    grid-row: 2;
+    margin-block-start: calc(var(--name-line) * -1);
+    margin-inline-end: calc(var(--gutter) * -1);
+  }
+  .hero-plate-tilt,
+  .hero-plate-face {
+    height: 100%;
+  }
+  .hero-plate-face {
+    position: relative;
+    overflow: clip;
+    background: var(--color-photo-rest);
+  }
+  /* Selalu lebih lebar dari plate dan rata kanan: sisi kiri foto yang lebih gelap tidak pernah tampil. */
+  .hero-plate-photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 113%;
+    max-width: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 0;
+  }
+  .hero-name-frame {
+    position: absolute;
+    inset: 0;
+    overflow: clip;
+  }
+  .hero-name-copy {
+    position: absolute;
+    top: 0;
+    left: var(--plate-shift);
+    color: var(--color-on-photo);
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+  }
+  .hero-copy {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    padding-block: var(--spacing-3);
+  }
+
+  @media (width >= 48rem) {
+    .hero {
+      grid-template-rows: auto 1fr;
+      min-height: 0;
+      padding-block-end: var(--spacing-section);
+    }
+    .hero-plate {
+      /* Kolom 4 sampai tepi layar: lebar plate tepat lima kali kolom ditambah gutter. */
+      --plate-shift: -60%;
+      grid-column: 4 / -1;
+      grid-row: 1 / 3;
+      align-self: start;
+      aspect-ratio: 2 / 3;
+      margin-block-start: var(--name-line);
+    }
+    .hero-copy {
+      grid-column: 1 / 4;
+      grid-row: 2;
+      padding-block: var(--spacing-6) 0;
+    }
+  }
+  @media (width >= 80rem) {
+    .hero-plate {
+      --plate-shift: calc(-120% - var(--gutter) * 1.2);
+      grid-column: 7 / 12;
+      margin-inline-end: 0;
+    }
+    .hero-copy {
+      grid-column: 1 / 7;
+    }
+  }
+
+  /*
+   * Susun Lapis, keadaan statis (tanpa JS, reduced motion): daftar dengan fondasi lebih dulu,
+   * tiap lapisan bergeser ke kanan. Plate hanya latar; teksnya mengalir di dalam `li`.
+   */
+  .structure {
+    padding-block: var(--spacing-section);
+  }
+  @media (width >= 48rem) {
+    .structure {
+      padding-block-start: 0;
+    }
+  }
+  .structure-intro {
+    grid-column: 1 / -1;
+  }
+  @media (width >= 80rem) {
+    .structure-intro {
+      grid-column: 1 / 10;
+    }
+  }
+  .structure-layers {
+    grid-column: 1 / -1;
+    margin-block-start: var(--spacing-12);
+  }
+  .layer-tone-ink {
+    --tone-bg: var(--color-ink);
+    --tone-ink: var(--color-canvas);
+  }
+  .layer-tone-3 {
+    --tone-bg: var(--color-plate-3);
+    --tone-ink: var(--color-ink);
+  }
+  .layer-tone-2 {
+    --tone-bg: var(--color-plate-2);
+    --tone-ink: var(--color-ink);
+  }
+  .layer-tone-1 {
+    --tone-bg: var(--color-plate-1);
+    --tone-ink: var(--color-ink);
+  }
+  .layer {
+    position: relative;
+  }
+  .layer-plate {
+    position: absolute;
+    inset: 0;
+  }
+  .layer-face {
+    position: relative;
+    height: 100%;
+    background: var(--tone-bg);
+    color: var(--tone-ink);
+  }
+  .layer-face-label {
+    display: none;
+  }
+  .layer-text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4) var(--spacing-6) var(--spacing-8);
+    color: var(--tone-ink);
+  }
+  .layer-tone-ink ::selection {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  .layer-title {
+    font-size: var(--text-sub);
+    line-height: var(--text-sub--line-height);
+    font-weight: var(--font-weight-bold);
+  }
+  @media (width >= 48rem) {
+    .layer {
+      margin-inline-start: calc(var(--layer-index) * 12%);
+    }
+    .layer-text {
+      padding: var(--spacing-6) var(--spacing-8) var(--spacing-12);
+    }
+  }
+
+  /* Proyek: plate tipografi. Kata besar dipotong tepi plate; nama lengkap selalu utuh di `h3`. */
+  .projects {
+    padding-block-end: var(--spacing-section);
+    overflow: clip;
+  }
+  .projects-stack {
+    row-gap: var(--spacing-6);
+  }
+  .project-plate {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--spacing-12);
+    min-height: var(--plate-height);
+    padding: var(--spacing-6);
+    overflow: clip;
+    transform-origin: 50% 0;
+    /* Kata besar di belakang teks tanpa `relative` pada teks, yang akan mengurung area klik plate. */
+    isolation: isolate;
+  }
+  @media (width >= 48rem) {
+    .project-plate {
+      min-height: var(--plate-height-wide);
+      padding: var(--spacing-8);
+    }
+  }
+  .project-ghost {
+    position: absolute;
+    z-index: -1;
+    left: var(--spacing-6);
+    font-size: clamp(9rem, 34vw, 32rem);
+    line-height: 0.8;
+    font-weight: var(--font-weight-black);
+    font-stretch: 125%;
+    letter-spacing: var(--tracking-display);
+    white-space: nowrap;
+    /* Warna teks plate yang dipudarkan, jadi tetap netral di semua nada dan kedua tema. */
+    opacity: 0.07;
+    user-select: none;
+    pointer-events: none;
+  }
+  .project-ghost-bottom {
+    bottom: -0.12em;
+  }
+  .project-ghost-top {
+    top: -0.1em;
+  }
+  .project-name {
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+  /* Seluruh plate bisa diklik; urutan baca dan nama tautan tetap hanya nama proyek. */
+  .project-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .project-link:focus-visible {
+    outline: none;
+  }
+  .project-link:focus-visible::after {
+    outline: 2px solid var(--color-edge);
+    outline-offset: -5px;
+  }
+  .project-cue {
+    transition: translate var(--duration-short) var(--ease-enter);
+  }
+  .project-plate:hover .project-cue {
+    translate: var(--spacing-2) 0;
+  }
+  /* Bila `cover` diisi, gambar menggantikan kata besar; teks tetap di bidang solid, bukan di atas foto. */
+  .project-cover-photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  /*
+   * Sisi balik plate. Bidang naik sementara isinya bergerak berlawanan dengan jarak sama, jadi isinya
+   * diam dan warnanya berbalik tepat di tepi yang naik, seperti nama di hero. Hanya saat ada kursor;
+   * di touch seluruh informasi utama sudah tampil di sisi depan.
+   */
+  .project-flip {
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .project-flip {
+      position: absolute;
+      inset: 0;
+      display: block;
+      overflow: clip;
+      background: var(--color-ink);
+      color: var(--color-canvas);
+      pointer-events: none;
+      /* `hidden` saat diam: batas 100% bisa jatuh di pecahan piksel dan menyisakan garis di dasar plate. */
+      visibility: hidden;
+      transform: translateY(100%);
+      transition:
+        transform 0.48s var(--ease-plate),
+        visibility 0s linear 0.48s;
+    }
+    .on-ink .project-flip {
+      background: var(--color-canvas);
+      color: var(--color-ink);
+    }
+    .project-flip-face {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--spacing-12);
+      height: 100%;
+      padding: var(--spacing-6);
+      transform: translateY(-100%);
+      transition: transform 0.48s var(--ease-plate);
+      user-select: none;
+    }
+    /* Jeda singkat: plate yang lewat di bawah kursor saat digulir tidak ikut berbalik. */
+    .project-plate:hover .project-flip,
+    .project-plate:has(.project-link:focus-visible) .project-flip {
+      visibility: visible;
+      transform: none;
+      transition-delay: 0.12s;
+    }
+    .project-plate:hover .project-flip-face,
+    .project-plate:has(.project-link:focus-visible) .project-flip-face {
+      transform: none;
+      transition-delay: 0.12s;
+    }
+    /* Cincin fokus tautan berada di bawah sisi balik, jadi digambar ulang di sini. */
+    .project-plate:has(.project-link:focus-visible) .project-flip {
+      outline: 2px solid var(--color-edge);
+      outline-offset: -5px;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) and (width >= 48rem) {
+    .project-flip-face {
+      padding: var(--spacing-8);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .project-plate .project-flip,
+    .project-plate .project-flip-face,
+    .project-plate:hover .project-flip,
+    .project-plate:hover .project-flip-face,
+    .project-plate:has(.project-link:focus-visible) .project-flip,
+    .project-plate:has(.project-link:focus-visible) .project-flip-face {
+      transition: none;
+    }
+  }
+
+  /* Pengalaman, Keahlian, Kontak */
+  .skill-plain {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--spacing-12);
+    padding-inline: var(--spacing-3);
+  }
+  .skill-token {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--spacing-12);
+    padding-inline: var(--spacing-3);
+    background: var(--color-plate-2);
+    color: var(--color-ink);
+    text-align: start;
+    cursor: pointer;
+  }
+  .skill-token:hover,
+  .skill-token[data-previewing] {
+    background: var(--color-plate-3);
+  }
+  .skill-token[aria-pressed="true"] {
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+  .skill-token:active {
+    translate: 0 1px;
+  }
+  :root:not([data-js]) .skill-token {
+    pointer-events: none;
+  }
+  /* Panel sticky setinggi sampai 193px: token yang difokus tidak boleh berakhir di baliknya. */
+  @media (width < 80rem) {
+    .skill-token {
+      scroll-margin-block-end: var(--spacing-48);
+    }
+  }
+
+  /* Di bawah 1280px panel menempel di bawah layar: hasil pilihan terlihat tanpa menggulir. */
+  .skills-panel {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--z-index-plate);
+    margin-inline: calc(var(--gutter) * -1);
+    padding: var(--spacing-3) var(--gutter);
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+  .skills-panel ::selection {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  .skills-project[data-match="false"] {
+    display: none;
+  }
+  .skills-project-link {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--spacing-4);
+    min-height: var(--spacing-12);
+  }
+  :root:not([data-js]) .skills-panel {
+    position: static;
+  }
+  :root:not([data-js]) .skills-project[data-match="false"] {
+    display: block;
+  }
+  @media (width >= 80rem) {
+    .skills-panel {
+      top: var(--spacing-24);
+      bottom: auto;
+      align-self: start;
+      margin-inline: 0;
+      padding: 0;
+      background: none;
+      color: var(--color-ink);
+    }
+    .skills-panel ::selection {
+      background: var(--color-ink);
+      color: var(--color-canvas);
+    }
+    .skills-status {
+      margin-block-end: var(--spacing-4);
+    }
+    /* Baris yang cocok tetap terbaca sebagai plate terpisah, bukan satu blok. */
+    .skills-projects {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-1);
+    }
+    .skills-project[data-match="false"] {
+      display: block;
+    }
+    .skills-project-link {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--spacing-3) var(--spacing-4);
+      transition: translate var(--duration-short) var(--ease-enter);
+    }
+    .skills-project-link:hover {
+      background: var(--color-plate-1);
+    }
+    /* Baris yang cocok berbalik dan bergeser; baris lain mundur ke tinta ketiga, tetap terbaca. */
+    .skills-panel[data-state="active"] .skills-project[data-match="false"] {
+      color: var(--color-ink-3);
+    }
+    .skills-project[data-match="true"] .skills-project-link {
+      background: var(--color-ink);
+      color: var(--color-canvas);
+      translate: calc(var(--spacing-4) * -1) 0;
+    }
+    .skills-project[data-match="true"] ::selection {
+      background: var(--color-canvas);
+      color: var(--color-ink);
+    }
+  }
+
+  /* Foto keluar sampai tepi kanan layar, fondasi tinta sampai tepi kiri, keduanya melewati batas grid. */
+  .contact,
+  .case-slot {
+    --bleed: calc(var(--gutter) + max(0px, (100vw - var(--container-page)) / 2));
+  }
+  .contact {
+    /* Batas dengan footer bisa jatuh di pecahan piksel: tanpa tumpang tindih, alas tembus sebagai garis. */
+    margin-block-end: -1px;
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--gutter);
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .contact-photo {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-inline: calc(var(--gutter) * -1);
+  }
+  .contact-frame {
+    aspect-ratio: 4 / 5;
+    /* Tepi bawah foto tidak boleh mengintip di bawah plate; celahnya tertutup footer. */
+    margin-block-end: 1px;
+  }
+  .contact-frame img {
+    /* Kepala dan map tetap di dalam bingkai saat foto dipotong. */
+    object-position: 50% 30%;
+  }
+  .contact-plate {
+    position: relative;
+    z-index: var(--z-index-plate);
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: var(--spacing-8) var(--gutter) var(--spacing-12);
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+  /* Satu baris utuh: ukuran mengikuti lebar agar alamat tidak pernah terpecah. */
+  .contact-email {
+    display: flex;
+    align-items: center;
+    min-height: var(--spacing-12);
+    font-size: min(5.8vw, 2rem);
+    line-height: 1.1;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: var(--tracking-title);
+    overflow-wrap: anywhere;
+    text-decoration-line: underline;
+  }
+  @media (width >= 48rem) {
+    .contact-photo {
+      grid-column: 3 / -1;
+      margin-inline: 0 calc(var(--bleed) * -1);
+    }
+    .contact-plate {
+      grid-column: 1 / 8;
+      grid-row: 1;
+      align-self: end;
+      margin-inline: calc(var(--bleed) * -1) 0;
+      padding-inline: var(--bleed) var(--spacing-8);
+    }
+    .contact-email {
+      font-size: 4.2vw;
+    }
+  }
+  @media (width >= 80rem) {
+    .contact-photo {
+      grid-column: 6 / -1;
+    }
+    .contact-frame {
+      aspect-ratio: 1;
+    }
+    .contact-plate {
+      grid-column: 1 / 10;
+      padding-block: var(--spacing-12) var(--spacing-16);
+      padding-inline-end: var(--spacing-12);
+    }
+    .contact-email {
+      font-size: min(4.4vw, 5rem);
+    }
+  }
+
+  /* Studi kasus */
+  .case-cover {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--spacing-12);
+    min-height: calc(100svh - var(--spacing-16));
+    padding: var(--spacing-2) var(--bleed) var(--spacing-12);
+    overflow: clip;
+    transform-origin: 50% 0;
+    isolation: isolate;
+  }
+  /* Tinggi dibatasi agar nama proyek tetap di viewport pertama. */
+  .case-cover-photo {
+    width: 100%;
+    height: 48svh;
+    object-fit: cover;
+  }
+  .case-steps {
+    display: flex;
+    flex-direction: column;
+  }
+  .case-step {
+    padding: var(--spacing-4) var(--spacing-6) var(--spacing-6);
+    color: var(--color-ink);
+  }
+  @media (width >= 48rem) {
+    .case-step {
+      margin-inline-start: calc(var(--step) * 8%);
+      padding: var(--spacing-6) var(--spacing-8) var(--spacing-8);
+    }
+  }
+  .case-outcome {
+    max-width: 32ch;
+    font-size: var(--text-sub);
+    line-height: var(--text-sub--line-height);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* About */
+  /* "Menerjemahkan" adalah kata terpanjang; di ponsel ukurannya mengikuti lebar agar tidak meluap. */
+  .principle .type-title {
+    font-size: min(var(--text-title), 9.6vw);
+  }
+  @media (width >= 80rem) {
+    .principle {
+      margin-inline-start: calc(var(--step) * (100% + var(--gutter)) / var(--grid-columns));
+      max-width: calc((100% + var(--gutter)) * 8 / var(--grid-columns));
+    }
+  }
+  .credentials {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .credentials th,
+  .credentials td {
+    text-align: start;
+    vertical-align: top;
+  }
+  .credentials tbody th {
+    font-weight: var(--font-weight-bold);
+  }
+  /* Tabel sungguhan mulai 768px. Di ponsel tiap baris menjadi blok; kepala kolom hanya untuk pembaca layar. */
+  @media (width < 48rem) {
+    .credentials thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+    .credentials tbody,
+    .credentials tr,
+    .credentials tbody th,
+    .credentials td {
+      display: block;
+    }
+    .credentials tr {
+      padding-block: var(--spacing-4);
+    }
+    .credentials td {
+      margin-block-start: var(--spacing-1);
+    }
+  }
+  @media (width >= 48rem) {
+    .credentials {
+      table-layout: fixed;
+    }
+    .credentials th,
+    .credentials td {
+      padding-block: var(--spacing-4);
+      padding-inline-end: var(--gutter);
+    }
+    .credentials thead th {
+      width: 28%;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-ink-2);
+    }
+    .credentials thead th:first-child {
+      width: 42%;
+    }
+    .credentials thead th:last-child {
+      padding-inline-end: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Sampul menempel, bidang alas naik di atasnya. Tanpa JS dan reduced motion tetap mengalir biasa. */
+    :root[data-js] .case-slot {
+      position: sticky;
+      top: 0;
+    }
+    /* Breadcrumb yang difokus tidak tertutup header atau bidang alas yang sudah naik. */
+    :root[data-js] .case-slot:has(:focus-visible) {
+      top: var(--spacing-16);
+      z-index: var(--z-index-plate);
+    }
+
+    /* Masuk tanpa menunda paint: hanya `translate`, tidak pernah menyembunyikan teks LCP. */
+    :root:not([data-loader="run"]) .hero-settle {
+      animation: hero-settle var(--duration-long) var(--ease-enter) both;
+    }
+    :root:not([data-loader="run"]) .hero-settle-2 {
+      animation-delay: var(--stagger);
+    }
+    :root:not([data-loader="run"]) .hero-settle-3 {
+      animation-delay: calc(var(--stagger) * 2);
+    }
+
+    /* Tumpukan hanya saat JS hidup; tanpa JS dan reduced motion tetap daftar statis. */
+    :root[data-js] .project-slot {
+      position: sticky;
+      top: calc(var(--spacing-4) + var(--slot-index) * var(--spacing-3));
+    }
+    /* Plate yang difokus naik di atas plate berikutnya, yang kalau tidak akan menutupinya. */
+    :root[data-js] .project-slot:has(:focus-visible) {
+      z-index: var(--z-index-plate);
+    }
+  }
+
+  /* Di bawah 1024px tidak ada 3D: lapisan baru menumpuk, label lapisan sebelumnya tetap terlihat. */
+  @media (prefers-reduced-motion: no-preference) and ((width < 64rem) or (height < 44rem)) {
+    :root[data-js] .layer {
+      /* Tepat setinggi label: baris teknologi tidak mengintip dari lapisan yang tertutup. */
+      --layer-tab: 3.25rem;
+      position: sticky;
+      top: calc(var(--spacing-4) + var(--layer-index) * var(--layer-tab));
+      min-height: min(56svh, 24rem);
+    }
+    :root[data-js] .layer-text {
+      padding-block-start: var(--spacing-3);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) and (width >= 48rem) and ((width < 64rem) or (height < 44rem)) {
+    :root[data-js] .layer {
+      --layer-tab: 3.75rem;
+    }
+  }
+
+  /*
+   * Mode adegan, sama persis dengan `queries.scene` di `lib/gsap.ts`. Ruang scroll sudah dicadangkan
+   * sebelum chunk motion tiba, jadi tidak ada pergeseran layout, dan pin memakai `sticky`, bukan
+   * spacer dari ScrollTrigger. `data-motion-off`: chunk gagal dimuat, kembali ke keadaan statis.
+   * Di mode ini `.hero` menjadi `contents` agar plate bisa sticky melewati batas hero.
+   */
+  @media (width >= 64rem) and (height >= 44rem) and (prefers-reduced-motion: no-preference) {
+    :root[data-js]:not([data-motion-off]) {
+      .maket {
+        display: grid;
+        grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+        grid-template-rows: auto auto auto;
+        column-gap: var(--gutter);
+        max-width: var(--container-page);
+        margin-inline: auto;
+        padding-inline: var(--gutter);
+        padding-block-start: var(--hero-top);
+      }
+      .hero {
+        display: contents;
+      }
+      .hero-plate {
+        grid-row: 1 / 4;
+        position: sticky;
+        top: var(--plate-top);
+      }
+      .hero-copy {
+        grid-row: 2;
+        min-height: calc(100svh - var(--plate-top) - var(--name-line));
+      }
+
+      /* Pin 180svh: tinggi section dikurangi satu layar. Ketukannya ada di `structure-motion.tsx`. */
+      .structure {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        height: 280svh;
+        margin-inline: calc(var(--gutter) * -1);
+        padding-block: 0;
+      }
+      /* Proyek naik di atas plate yang sedang memenuhi layar, sehingga judulnya tiba saat fill berakhir. */
+      .projects {
+        position: relative;
+        z-index: var(--z-index-plate);
+        margin-block-start: -48svh;
+      }
+      .structure-stage {
+        position: sticky;
+        top: 0;
+        height: 100svh;
+        grid-template-rows: auto repeat(4, auto) 1fr;
+        align-content: start;
+        /* Mengikuti tinggi layar: pada 1024x704 seluruh daftar harus tetap muat. */
+        padding-block-start: clamp(var(--spacing-16), 10svh, var(--spacing-24));
+        /* Hanya vertikal: plate terakhir harus bisa melebar melewati batas lebar halaman. */
+        overflow-y: clip;
+      }
+      /* Teks lebih lebar dari kolom kiri hero, supaya seluruh daftar muat dalam satu layar. */
+      .structure-intro {
+        grid-column: 1 / 5;
+        grid-row: 1;
+        margin-block-end: var(--spacing-6);
+      }
+      .structure-layers,
+      .layer {
+        display: contents;
+      }
+      .layer {
+        margin-inline-start: 0;
+      }
+      .layer-plate {
+        position: relative;
+        inset: auto;
+        grid-column: 4 / -1;
+        grid-row: 1 / -1;
+        align-self: start;
+        aspect-ratio: 2 / 3;
+        margin-block-start: var(--plate-top);
+        margin-inline-end: calc(var(--gutter) * -1);
+      }
+      .layer-face-label {
+        position: absolute;
+        bottom: var(--spacing-8);
+        left: var(--spacing-8);
+        display: block;
+      }
+      .layer-text {
+        grid-column: 1 / 5;
+        gap: var(--spacing-1);
+        padding: var(--spacing-2) 0 0;
+        color: var(--color-ink);
+      }
+      .layer:nth-child(1) .layer-text {
+        grid-row: 2;
+      }
+      .layer:nth-child(2) .layer-text {
+        grid-row: 3;
+      }
+      .layer:nth-child(3) .layer-text {
+        grid-row: 4;
+      }
+      .layer:nth-child(4) .layer-text {
+        grid-row: 5;
+      }
+      .layer-tone-ink ::selection {
+        background: var(--color-ink);
+        color: var(--color-canvas);
+      }
+      .layer-title {
+        font-size: var(--text-body);
+        line-height: var(--text-body--line-height);
+      }
+    }
+  }
+  @media (width >= 80rem) and (height >= 44rem) and (prefers-reduced-motion: no-preference) {
+    :root[data-js]:not([data-motion-off]) {
+      .structure-intro,
+      .layer-text {
+        grid-column: 1 / 7;
+      }
+      .layer-plate {
+        grid-column: 7 / 12;
+        margin-inline-end: 0;
+      }
+    }
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    translate: 0 0.14em;
+  }
+}
+
+@keyframes loader-failsafe {
+  to {
+    visibility: hidden;
+    transform: translateY(-100%);
+  }
+}
+
+/* Tema baru naik sebagai plate di atas yang lama. Tanpa atribut ini, fade singkat bawaan. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-micro);
+}
+:root[data-theme-transition="plate"]::view-transition-old(root) {
+  animation: none;
+}
+:root[data-theme-transition="plate"]::view-transition-new(root) {
+  animation: theme-plate var(--duration-base) var(--ease-plate) both;
+  mix-blend-mode: normal;
+}
+@keyframes theme-plate {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .nav-marker::after {
+    transition: none;
+  }
+}
+
+/* Mode kontras tinggi menimpa nada bidang: status yang hanya memakai latar harus digambar ulang. */
+@media (forced-colors: active) {
+  .skill-token {
+    border-width: 1px;
+    border-color: ButtonText;
+  }
+  .skill-token[aria-pressed="true"] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+  .nav-marker::after {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+  /* Di bawah 1280px baris yang tidak cocok sudah disembunyikan. */
+  @media (width >= 80rem) {
+    .skills-project[data-match="true"] .skills-project-link {
+      forced-color-adjust: none;
+      background: Highlight;
+      color: HighlightText;
+    }
+  }
+}
