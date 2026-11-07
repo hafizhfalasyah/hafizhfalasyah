@@ -19,6 +19,9 @@ next-env.d.ts
 /assets/photos/source/foto-5.*
 /assets/photos/private/
 
+# profil sumber konten memuat nomor telepon: hanya disimpan lokal
+/docs/Profil Lengkap*.md
+
 # testing
 /coverage
 
