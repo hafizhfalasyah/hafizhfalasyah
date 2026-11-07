@@ -1,0 +1,12 @@
+# Tidak dibutuhkan build, dan tidak boleh ikut terunggah:
+# foto asli (termasuk foto-2 dan foto-5) dan profil yang memuat nomor telepon.
+assets/photos/
+docs/
+
+# Hanya untuk pengembangan.
+.impeccable/
+.playwright-mcp/
+scripts/
+CLAUDE.md
+DESIGN.md
+PRODUCT.md

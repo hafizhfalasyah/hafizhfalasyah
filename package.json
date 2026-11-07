@@ -1,26 +1,38 @@
 {
-  "name": "hafizhfalasyah_v1",
+  "name": "hafizhfalasyah",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint --max-warnings=0",
+    "typecheck": "next typegen && tsc --noEmit",
+    "photos": "node scripts/grade-photos.mjs",
+    "check": "node scripts/check-release.mjs"
   },
   "dependencies": {
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@gsap/react": "2.1.2",
+    "gsap": "3.15.1",
+    "lenis": "1.3.27",
+    "next": "16.4.5",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.1.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@tailwindcss/postcss": "4.3.4",
+    "@types/node": "^22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@typescript/native": "npm:typescript@7.0.2",
+    "eslint": "10.14.0",
+    "eslint-config-next": "16.4.5",
+    "sharp": "0.35.5",
+    "tailwindcss": "4.3.4",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }
