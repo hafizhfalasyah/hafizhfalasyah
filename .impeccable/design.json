@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T16:30:00+07:00",
+  "title": "Design System: Portofolio Hafizh Falasyah",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Alas Maket",
+        "canonical": "light-dark(oklch(0.985 0 0), oklch(0.145 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "plate-1": {
+        "role": "neutral",
+        "displayName": "Karton Pertama",
+        "canonical": "light-dark(oklch(0.955 0 0), oklch(0.19 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "plate-2": {
+        "role": "neutral",
+        "displayName": "Karton Kedua",
+        "canonical": "light-dark(oklch(0.92 0 0), oklch(0.235 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "plate-3": {
+        "role": "neutral",
+        "displayName": "Karton Ketiga",
+        "canonical": "light-dark(oklch(0.88 0 0), oklch(0.28 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta Utama",
+        "canonical": "light-dark(oklch(0.18 0 0), oklch(0.96 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Tinta Kedua",
+        "canonical": "light-dark(oklch(0.38 0 0), oklch(0.76 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Tinta Ketiga",
+        "canonical": "light-dark(oklch(0.5 0 0), oklch(0.64 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "edge": {
+        "role": "neutral",
+        "displayName": "Tepi Potong",
+        "canonical": "light-dark(oklch(0.57 0 0), oklch(0.56 0 0))",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "on-photo": {
+        "role": "neutral",
+        "displayName": "Tinta Foto",
+        "canonical": "oklch(0.18 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      },
+      "photo-rest": {
+        "role": "neutral",
+        "displayName": "Dinding Foto",
+        "canonical": "oklch(0.72 0 0)",
+        "tonalRamp": [
+          "oklch(0.15 0 0)",
+          "oklch(0.26 0 0)",
+          "oklch(0.38 0 0)",
+          "oklch(0.49 0 0)",
+          "oklch(0.61 0 0)",
+          "oklch(0.72 0 0)",
+          "oklch(0.84 0 0)",
+          "oklch(0.95 0 0)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Nama di viewport pertama; dibatasi lebar dan tinggi layar."
+      },
+      "display-small": {
+        "displayName": "Display Small",
+        "purpose": "Nama proyek di plate, sampul studi kasus, pager, dan label plate transisi."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Judul section dan baris menu."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Peran, judul lapisan, dan judul bagian studi kasus."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Tagline dan kalimat pembuka section."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Teks dasar."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Teks tombol dan tautan tindakan."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Kontrol bahasa dan tema, label section aktif di ponsel."
+      },
+      "tech": {
+        "displayName": "Tech",
+        "purpose": "Nama teknologi, periode, dan token Keahlian."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-enter",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Elemen masuk; padanan GSAP expo.out."
+      },
+      {
+        "name": "ease-plate",
+        "value": "cubic-bezier(0.76, 0, 0.24, 1)",
+        "purpose": "Plate menutup dan membuka; padanan GSAP power4.inOut."
+      },
+      {
+        "name": "duration-micro",
+        "value": "0.18s",
+        "purpose": "Umpan balik kecil."
+      },
+      {
+        "name": "duration-short",
+        "value": "0.32s",
+        "purpose": "Perubahan status pendek."
+      },
+      {
+        "name": "duration-base",
+        "value": "0.6s",
+        "purpose": "Gerak dasar."
+      },
+      {
+        "name": "duration-long",
+        "value": "0.9s",
+        "purpose": "Gerak panjang."
+      },
+      {
+        "name": "stagger",
+        "value": "0.06s",
+        "purpose": "Jeda antar elemen berurutan."
+      },
+      {
+        "name": "opacity-dim",
+        "value": "0.62",
+        "purpose": "Opacity terendah teks yang menunggu giliran; tetap lolos AA di kedua tema."
+      },
+      {
+        "name": "scene-height",
+        "value": "280svh",
+        "purpose": "Tinggi section Susun Lapis di mode adegan; pin 180svh."
+      },
+      {
+        "name": "scene-beats",
+        "value": "tilt 28, stage 100, lapisan 105 (+20 per lapisan), swap 165, kalimat selesai 185, teks pudar 200 sampai 220, rapat 205, fill 232 (svh)",
+        "purpose": "Ketukan scroll Susun Lapis di structure-motion.tsx."
+      },
+      {
+        "name": "projects-overlap",
+        "value": "-48svh",
+        "purpose": "Section Proyek naik menimpa plate yang memenuhi layar."
+      },
+      {
+        "name": "covered-scale",
+        "value": "0.95",
+        "purpose": "Plate proyek yang tertutup plate berikutnya."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "gutter-32",
+        "value": "1440px"
+      },
+      {
+        "name": "gutter-40",
+        "value": "1920px"
+      },
+      {
+        "name": "scene",
+        "value": "(width >= 1024px) and (height >= 704px) and (prefers-reduced-motion: no-preference)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Tindakan utama, bidang solid yang berbalik otomatis antar tema.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Unduh CV (EN)</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.5rem; background: var(--color-ink); color: var(--color-canvas); font-family: var(--font-sans); font-size: var(--text-body); font-weight: 500; white-space: nowrap; text-decoration: none; border-radius: 0; } .ds-btn-primary:hover { background: var(--color-ink-2); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-edge); outline-offset: 3px; } .ds-btn-primary:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Inverse Button",
+      "kind": "button",
+      "refersTo": "button-inverse",
+      "description": "Tombol CV di dalam Fondasi Tinta (plate kontak).",
+      "html": "<div class=\"ds-on-ink\"><a class=\"ds-btn-inverse\" href=\"#\">Unduh CV (EN)</a></div>",
+      "css": ".ds-on-ink { background: var(--color-ink); padding: 2rem; } .ds-btn-inverse { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.5rem; background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); font-size: var(--text-body); font-weight: 500; white-space: nowrap; text-decoration: none; border-radius: 0; } .ds-btn-inverse:hover { background: var(--color-plate-2); } .ds-btn-inverse:focus-visible { outline: 2px solid var(--color-edge); outline-offset: 3px; } .ds-btn-inverse:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Action Link",
+      "kind": "button",
+      "refersTo": "link-action",
+      "description": "Tindakan sekunder di samping tombol primer.",
+      "html": "<a class=\"ds-link-action\" href=\"#\">Mari terhubung</a>",
+      "css": ".ds-link-action { display: inline-flex; align-items: center; min-height: 3rem; color: var(--color-ink); font-family: var(--font-sans); font-size: var(--text-body); font-weight: 500; white-space: nowrap; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; } .ds-link-action:hover { color: var(--color-ink-2); } .ds-link-action:focus-visible { outline: 2px solid var(--color-edge); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header Controls",
+      "kind": "nav",
+      "refersTo": "control",
+      "description": "Bahasa sebagai dua tautan 48 x 48px dan satu tombol tema yang berputar, dengan mode aktif ditebalkan.",
+      "html": "<div class=\"ds-controls\"><nav class=\"ds-locale\" aria-label=\"Bahasa\"><a class=\"ds-control ds-control-square\" href=\"#\" aria-current=\"true\">id</a><a class=\"ds-control ds-control-square\" href=\"#\">en</a></nav><button class=\"ds-control\" type=\"button\">Tema <span class=\"ds-control-mode\">Sistem</span></button></div>",
+      "css": ".ds-controls { display: flex; align-items: center; } .ds-locale { display: flex; } .ds-control { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0 0.75rem; background: none; border: 0; color: var(--color-ink-3); font-family: var(--font-sans); font-size: var(--text-meta); font-stretch: 87.5%; text-decoration: none; white-space: nowrap; cursor: pointer; } .ds-control-square { min-width: 3rem; padding: 0; text-transform: uppercase; } .ds-control:hover { color: var(--color-ink); } .ds-control[aria-current] { color: var(--color-ink); font-weight: 700; } .ds-control-mode { color: var(--color-ink); font-weight: 700; } .ds-control:focus-visible { outline: 2px solid var(--color-edge); outline-offset: 3px; }"
+    },
+    {
+      "name": "Skill Token",
+      "kind": "chip",
+      "refersTo": "skill-token",
+      "description": "Tombol filter Keahlian: berlatar Karton Kedua, terpilih berbalik ke Fondasi Tinta.",
+      "html": "<ul class=\"ds-tokens\"><li><button class=\"ds-token\" type=\"button\" aria-pressed=\"false\">Laravel</button></li><li><button class=\"ds-token\" type=\"button\" aria-pressed=\"true\">MySQL</button></li><li class=\"ds-token-plain\">Service Layer</li></ul>",
+      "css": ".ds-tokens { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem; list-style: none; margin: 0; padding: 0; } .ds-token, .ds-token-plain { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 0.75rem; font-family: var(--font-mono); font-size: var(--text-meta); line-height: 1.45; font-variant-numeric: tabular-nums; color: var(--color-ink); } .ds-token { background: var(--color-plate-2); border: 0; border-radius: 0; cursor: pointer; } .ds-token:hover { background: var(--color-plate-3); } .ds-token[aria-pressed=\"true\"] { background: var(--color-ink); color: var(--color-canvas); } .ds-token:active { translate: 0 1px; } .ds-token:focus-visible { outline: 2px solid var(--color-edge); outline-offset: 3px; }"
+    },
+    {
+      "name": "Plate Stack",
+      "kind": "custom",
+      "refersTo": "plate-foundation",
+      "description": "Daftar berurutan berisi bidang bernada menurun dengan fondasi terbalik di dasar.",
+      "html": "<ol class=\"ds-plates\"><li class=\"ds-plate ds-plate-1\"><h3>Tampilan</h3><p>React.js, Next.js, Tailwind CSS</p></li><li class=\"ds-plate ds-plate-2\"><h3>Hak akses</h3><p>Autentikasi, RBAC, Google OAuth, Password hashing</p></li><li class=\"ds-plate ds-plate-3\"><h3>Alur bisnis</h3><p>REST API, MVC, Repository Pattern, Service Layer</p></li><li class=\"ds-plate ds-plate-base\"><h3>Model data</h3><p>MySQL, PostgreSQL, Desain database relasional, Migrasi database</p></li></ol>",
+      "css": ".ds-plates { list-style: none; margin: 0; padding: 0; } .ds-plate { padding: 1.5rem; border-radius: 0; } .ds-plate h3 { margin: 0 0 0.75rem; font-family: var(--font-sans); font-size: var(--text-sub); font-weight: 700; line-height: 1.15; } .ds-plate p { margin: 0; font-family: var(--font-mono); font-size: var(--text-meta); line-height: 1.45; } .ds-plate-1 { background: var(--color-plate-1); color: var(--color-ink); } .ds-plate-2 { background: var(--color-plate-2); color: var(--color-ink); margin-left: 8%; } .ds-plate-3 { background: var(--color-plate-3); color: var(--color-ink); margin-left: 4%; } .ds-plate-base { background: var(--color-ink); color: var(--color-canvas); } .ds-plate-1 { margin-left: 12%; }"
+    },
+    {
+      "name": "Project Plate",
+      "kind": "card",
+      "refersTo": "plate-second",
+      "description": "Plate tipografi proyek: kata besar opacity 0.07 dipotong tepi, nama Display Small, seluruh plate bisa diklik.",
+      "html": "<article class=\"ds-project\"><span class=\"ds-project-ghost\" aria-hidden=\"true\">Kripiku</span><p class=\"ds-project-meta\">Februari 2024</p><h3 class=\"ds-project-name\"><a class=\"ds-project-link\" href=\"#\">Kripiku</a></h3><span class=\"ds-project-cue\" aria-hidden=\"true\">Buka proyek</span></article>",
+      "css": ".ds-project { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 3rem; min-height: 22rem; padding: 2rem; overflow: clip; isolation: isolate; background: var(--color-plate-2); color: var(--color-ink); } .ds-project-ghost { position: absolute; z-index: -1; left: 1.5rem; top: -0.1em; font-family: var(--font-sans); font-size: 12rem; line-height: 0.8; font-weight: 800; font-stretch: 125%; letter-spacing: -0.02em; white-space: nowrap; opacity: 0.07; pointer-events: none; } .ds-project-meta { margin: 0; font-family: var(--font-mono); font-size: var(--text-meta); } .ds-project-name { margin: 0; font-family: var(--font-sans); font-size: var(--text-display-s); line-height: 0.95; font-weight: 800; font-stretch: 112.5%; letter-spacing: -0.02em; } .ds-project-link { color: inherit; text-decoration: none; } .ds-project-link::after { content: \"\"; position: absolute; inset: 0; } .ds-project-link:focus-visible { outline: none; } .ds-project-link:focus-visible::after { outline: 2px solid var(--color-edge); outline-offset: -5px; } .ds-project-cue { font-weight: 500; text-decoration: underline; transition: translate var(--duration-short) var(--ease-enter); } .ds-project:hover .ds-project-cue { translate: 0.5rem 0; }"
+    },
+    {
+      "name": "Monogram",
+      "kind": "custom",
+      "description": "Monogram HF dari lima persegi panjang yang mengikuti warna teks.",
+      "html": "<svg class=\"ds-monogram\" viewBox=\"0 0 16 16\" fill=\"currentColor\" aria-hidden=\"true\"><rect x=\"1\" y=\"2\" width=\"3\" height=\"12\"/><rect x=\"7\" y=\"2\" width=\"3\" height=\"12\"/><rect x=\"10\" y=\"2\" width=\"5\" height=\"3\"/><rect x=\"4\" y=\"7\" width=\"3\" height=\"3\"/><rect x=\"10\" y=\"7\" width=\"4\" height=\"3\"/></svg>",
+      "css": ".ds-monogram { display: block; width: 2rem; height: 2rem; color: var(--color-ink); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Maket Kartu",
+    "overview": "Setiap permukaan diperlakukan sebagai kartu yang dipotong dan ditumpuk di atas sebuah alas. Kedalaman datang dari nada bidang, bukan dari bayangan atau garis tipis. Fondasi selalu paling kontras terhadap alas, dan lapisan di atasnya makin dekat ke nada alas, sehingga struktur halaman sendiri menyampaikan cara kerja yang menjadi inti portofolio ini.\n\nKepribadiannya monochrome, presisi, tenang, dan percaya diri. Kepadatannya rendah: satu pernyataan besar diberi ruang lega, lalu detail dipadatkan ke dalam bidang yang jelas batasnya. Tipografi memikul ekspresi, foto hitam putih memberi bukti manusia, dan warna tidak dipakai sama sekali.\n\nSistem ini secara sadar menolak template portofolio developer generik (gradient ungu, glassmorphism, card grid seragam, emoji sebagai ikon, eyebrow chip) dan pola editorial yang sudah menjadi kebiasaan AI (garis tipis ala koran, serif italic besar, label mono kecil yang direnggangkan).",
+    "keyCharacteristics": [
+      "Chroma 0 di semua token, dengan foto hitam putih yang memakai netral yang sama.",
+      "Bidang bernada solid sebagai satu-satunya sumber kedalaman, tanpa bayangan.",
+      "Radius 0 di semua elemen.",
+      "Satu keluarga variable font dengan tiga suara, lewat sumbu lebar dan berat.",
+      "Skala token tertutup: nilai di luar `globals.css` tidak menghasilkan CSS."
+    ],
+    "rules": [
+      {
+        "name": "The Chroma Zero Rule",
+        "body": "Semua warna ber-chroma 0, di kedua tema. Aksen berwarna tidak ada dalam sistem ini, termasuk untuk status atau hover. Satu-satunya pengecualian sah adalah mode kontras tinggi (`forced-colors: active`): token terpilih dan baris proyek yang cocok (mulai 1280px) memakai `Highlight` dan `HighlightText`, token memakai batas `ButtonText`, dan penanda nav memakai `CanvasText`. Warna itu milik sistem operasi pengguna dan hanya muncul saat mode tersebut aktif.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Declaration Rule",
+        "body": "Setiap warna dideklarasikan sekali dengan kedua sisinya. Tidak ada blok tema gelap terpisah, dan tema hanya ditentukan oleh `color-scheme`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Three Limit Rule",
+        "body": "Tinta Ketiga hanya boleh berada di atas Alas Maket dan Karton Pertama. Di Karton Kedua dan Ketiga, teks hanya memakai Tinta Utama atau Tinta Kedua, karena hanya kombinasi itu yang sudah dihitung lolos AA di kedua tema.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dim Floor Rule",
+        "body": "Teks yang dipudarkan menunggu gilirannya tidak pernah turun di bawah opacity 0.62, karena pengunjung bisa berhenti di tengah scroll. Kontras teks terendah terukur 5,18:1 (terang) dan 5,47:1 (gelap) saat animasi, dan 5,75:1 serta 5,88:1 saat statis.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "Hirarki dibangun dengan sumbu lebar dan berat Mona Sans sebelum menambah keluarga font baru.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Is Fact Rule",
+        "body": "Martian Mono hanya untuk nama teknologi dan periode, dan tidak pernah uppercase dengan tracking lebar. Mono bukan kostum teknis.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tracking Floor Rule",
+        "body": "Tracking display berhenti di -0.02em. Lebih rapat dari itu, huruf bersentuhan pada lebar 125 dan berat 800.",
+        "section": "typography"
+      },
+      {
+        "name": "The Closed Scale Rule",
+        "body": "Tema bawaan Tailwind dihapus, sehingga utility hanya ada untuk nilai yang tertulis di `globals.css`. Bila sebuah kelas tidak menghasilkan CSS, nilainya memang di luar sistem: gunakan langkah terdekat, bukan nilai lepas.",
+        "section": "layout"
+      },
+      {
+        "name": "The Scene Mode Rule",
+        "body": "Mode adegan berlaku hanya bila lebar minimal 1024px, tinggi minimal 704px, dan motion tidak dikurangi, dengan query yang sama persis di CSS dan di `lib/gsap.ts`. Ruang scroll adegan dicadangkan CSS sebelum chunk motion tiba, sehingga tidak ada pergeseran layout.",
+        "section": "layout"
+      },
+      {
+        "name": "The Stacked Plate Rule",
+        "body": "Bila dua bidang perlu dibedakan, ubah nadanya atau tumpuk posisinya. Jangan menambah bayangan, blur, atau garis tepi.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Focus Surfaces Rule",
+        "body": "Elemen yang difokus tidak boleh berakhir di balik plate. Plate proyek yang berisi fokus naik ke lapisan `plate` di atas plate berikutnya; sampul studi kasus yang berisi fokus menempel di 64px pada lapisan `plate`, lalu fokus pada breadcrumb menggulir halaman kembali ke puncak, tempat sampul tampil utuh.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Cut Card Rule",
+        "body": "Tidak ada sudut membulat, pill, atau lingkaran pada elemen antarmuka. Token radius selain `none` tidak tersedia.",
+        "section": "shapes"
+      },
+      {
+        "name": "The One Preset Rule",
+        "body": "Semua foto melewati channel mix, kurva tone, dan grain yang identik. Foto tidak pernah disesuaikan satu per satu.",
+        "section": "components"
+      },
+      {
+        "name": "The Raster Provenance Rule",
+        "body": "Setiap raster yang terbit punya asal yang tercatat:\n- **Foto:** asli di `assets/photos/source/` dan tidak pernah disajikan. foto-1, 3, 4, 6, dan 7 terbit; foto-2 dan foto-5 privat, hasil gradingnya hanya ke `assets/photos/private/` yang di-ignore, dan file aslinya tidak di-commit. Semuanya digrading dengan satu preset oleh `scripts/grade-photos.mjs` lewat `pnpm photos` ke `public/photos/` sebagai AVIF dan WebP pada lebar 480, 640, 828, 1200, 1600, dan 2000px, tanpa pembesaran (foto-1 terbit pada lebar aslinya, 331px). Grain berbiji tetap per foto dan lebar, sehingga keluaran dapat diulang byte per byte; skrip mencetak sidik jari sha256 seluruh keluaran dan menulis manifest ukuran ke `src/content/photos.generated.json`.\n- **Ikon dan OG:** dibangkitkan dari kode, dari data monogram yang sama: `src/app/icon.svg`, `src/app/apple-icon.tsx`, gambar OG lewat `src/lib/og.tsx` dan rute `opengraph-image`, memakai nilai hex setara token tema gelap.\n- **CV:** PDF di `public/cv/` diterbitkan apa adanya.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "Do pakai token warna, teks, dan spacing dari `globals.css`, dan tambah token di sana bila memang perlu nilai baru.",
+      "Do bedakan bidang dengan nada dari Karton Pertama sampai Fondasi Tinta.",
+      "Do beri setiap kontrol target minimal 48px dan cincin fokus Tepi Potong.",
+      "Do pastikan elemen yang difokus tidak tertutup header atau plate lain.",
+      "Do tema-kan permukaan browser dari palet: seleksi teks terbalik, scrollbar Tepi Potong, dan caret Tinta Utama.",
+      "Do ukur kontras setiap teks di atas foto pada foto hasil grading.",
+      "Do pakai plate tipografi untuk proyek tanpa cover.",
+      "Do gambar ulang status yang hanya memakai latar dengan warna sistem saat `forced-colors` aktif."
+    ],
+    "donts": [
+      "Don't pakai warna ber-chroma, gradient ungu atau biru, atau glassmorphism.",
+      "Don't pakai bayangan, blur, atau garis tipis sebagai sumber kedalaman.",
+      "Don't pakai radius selain 0.",
+      "Don't pakai card grid seragam, eyebrow chip, atau emoji sebagai ikon.",
+      "Don't pakai mockup palsu atau layar buatan untuk proyek.",
+      "Don't pakai serif italic besar atau label mono kecil yang direnggangkan.",
+      "Don't pakai em dash atau en dash pada teks yang terlihat.",
+      "Don't pakai font Inter, Geist, Space Grotesk, Plus Jakarta Sans, Fraunces, atau Instrument Sans."
+    ]
+  }
+}
